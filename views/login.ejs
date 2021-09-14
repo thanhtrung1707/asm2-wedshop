@@ -1,0 +1,21 @@
+<%- include('head', { title: 'CAKEBAKERY SHOP' }) -%>
+
+<h1>Login</h1>
+<%- message %>
+
+<form method="post" action="/login">
+  <p>
+    <label>Username: </label>
+    <input type="text" name="username">
+  </p>
+  <p>
+    <label>Password: </label>
+    <input type="password" name="password">
+  </p>
+  <p>
+    <input type="submit" value="Login">
+  </p>
+</form>
+
+<p>Try accessing <a href="/restricted">Guess page</a>, then authenticate with "guess" and "guesspass".</p>
+© 2021 Cloud Computing Class - Greenwich VN
