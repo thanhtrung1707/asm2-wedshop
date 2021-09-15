@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+    <h1>
+        <%= title %>
+    </h1>
+    <div class="product">
+        <form action='/users/register' method="POST">
+            <label>Users name</label>
+            <input type="text" placeholder="Enter account_name" name="account_name">
+            <label> Password"</label>
+            <input type="text" placeholder="Enter account_passwork" name="account_passwork">
+            <button type="Submit"> Submit</button>
+        </form>
+    </div>
+</body>
+
+</html>

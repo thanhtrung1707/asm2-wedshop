@@ -1,0 +1,30 @@
+<%
+//Display data table by JavaScript
+if (userData.rowCount == 0)
+{
+%>  
+<p>No data found</p>
+<%  
+} else {
+  // Display header
+%> 
+
+<table border="1">
+  <tr>
+    <th>Use name </th>
+    <th>password</th>
+  </tr>
+<%  
+  // Display all rows , Object data : userData
+  //all rows: userData.rows, list array [...]
+  userData.rows.forEach( function(row) {
+    //Display a row
+    console.log(row);
+%>
+  <tr>
+    <td><%= row.account_name %></td>
+    <td><%= row.account_passwork %></td>
+  
+<%
+  });
+%>

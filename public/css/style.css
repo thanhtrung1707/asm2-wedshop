@@ -546,6 +546,10 @@ i:before {
 
 
 }
+.register_form{
+  background: rgb(168, 43, 147);
+  left: 20px;
+}
 .main_menu_area {
   position: relative;
   background: #fff;

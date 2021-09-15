@@ -23,7 +23,7 @@ router.post('/edit/:name', function(req, res) {
   var prod_name = req.params.name;
   const update_query = {
       text: 'UPDATE product SET Id=$1, Cake_name=$2, Price=$3, Date_of_manufacture=$4 ,Expiry=$5 WHERE Id=$6',
-      values: [req.body.id, req.body.cake_name, req.body.price, req.body.date_of_manufacture, req.body.expiry, prod_name]
+      values: [req.body.Id, req.body.Cake_name, req.body.Price, req.body.Date_of_manufacture, req.body.Expiry, prod_name]
   };
   pg_conn.query(update_query, function(err, data) {
       if (err) 
@@ -32,13 +32,13 @@ router.post('/edit/:name', function(req, res) {
       } else {
           var product_query = 'SELECT * FROM product';
           pg_conn.query(product_query, function(err, data) {
-              /* res.render('users_fe', {
+              res.render('users_fe', {
                     title: "Welcome to ATN shop Page",
                     h1_title: "Welcome to DPCB shop Page",
                     h2_title: "Update query database successfully",
                     userData: data 
-                });*/
-                res.redirect('/users')
+                });
+                //res.redirect('/users')
     
           });
       };
@@ -47,7 +47,7 @@ router.post('/edit/:name', function(req, res) {
 
 
 /*delete*/
-router.post('/delete/:name', function(req, res) {
+router.get('/delete/:name', function(req, res) {
   var prod_name = req.params.name;
   const del_query = {
       text: "DELETE FROM product WHERE Id=$1",
@@ -78,7 +78,7 @@ router.get('/insert', function(req, res) {
 router.post('/insert', function(req, res) {
   const insert_query = {
       text: "INSERT INTO product VALUES ($1,$2,$3,$4,$5)",
-      values: [req.body.Id, req.body.Cake_name, req.body.Price_name, req.body.Date_of_manufacture, req.body.Expity]
+      values: [req.body.Id, req.body.Cake_name, req.body.Price, req.body.Date_of_manufacture, req.body.Expiry]
   };
   pg_conn.query(insert_query, function(err, data) {
       if (err) {
@@ -98,7 +98,33 @@ router.post('/insert', function(req, res) {
       };
   });
 });
-
+/*register*/
+router.get('/register', function(req, res) {
+    res.render('register_form', { title: "/Sign up for an account" });
+  });
+  router.post('/register', function(req, res) {
+    const register_query = {
+        text: "INSERT INTO account VALUES ($1,$2)",
+        values: [req.body.account_name, req.body.account_passwork]
+    };
+    pg_conn.query(register_query, function(err, data) {
+        if (err) {
+            throw err;
+            res.render('error', { message: "Insert got error", error: err })
+        } else {
+            var account_query = 'SELECT * FROM account';
+            pg_conn.query(account_query, function(err, data) {
+                res.render('/users_fe', {
+                        title: "Sign Up Success",
+                        
+                        userData: data
+                    }); 
+               
+            });
+        };
+    });
+  });
+  
 
 
 module.exports = router;
